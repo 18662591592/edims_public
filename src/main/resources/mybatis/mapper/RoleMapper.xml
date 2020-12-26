@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgi.edims.mapper.RoleMapper" >
+  <resultMap id="RoleResultMap" type="com.bgi.edims.model.EdiRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+    <collection property="menus" column="{roleId=role_id}" select="com.bgi.edims.mapper.MenuMapper.getEdiMenusByRoleId"/>
+  </resultMap>
+  
+   <resultMap id="BaseRoleResultMap" type="com.bgi.edims.model.EdiRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="page_sql_filter">
+  		<if test="rows != null" >
+		limit #{startIndex},#{rows}
+		</if>
+  </sql>
+  
+  <!-- ############# -->
+  <!-- 角色相关sqlMap -->
+  <!-- ############# -->
+  <sql id="role_where_filter">
+  		<where>
+		<if test="roleId != null">and role_id=#{roleId}</if>
+		<if test="roleName != null">and role_name like '%${roleName}%'</if>
+		<if test="status != null">and status=#{status}</if>
+		<if test="type != null">and type=#{type}</if>
+		</where>
+  </sql>
+  
+  <!-- 增加角色 -->
+	<insert id="createEdiRole" parameterType="com.bgi.edims.model.EdiRole" >
+   		INSERT INTO edi_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">role_id,</if>
+			<if test="roleName != null">role_name,</if>
+			<if test="status != null">status,</if>
+			<if test="type != null">type,</if>
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="lastModifyUser != null">last_modify_user,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">#{roleId},</if>
+			<if test="roleName != null">#{roleName},</if>
+			<if test="status != null">#{status},</if>
+			<if test="type != null">#{type},</if>
+			<if test="lastModifyTime != null">#{lastModifyTime},</if>
+			<if test="lastModifyUser != null">#{lastModifyUser},</if>
+		</trim>
+   	</insert>
+    <insert id="createEdiUserRoles" parameterType="java.util.List" >
+   		Replace INTO edi_user_role(user_id,role_id,last_modify_time,last_modify_user,status,type)
+   		<foreach collection="list" index="index" item="item" separator="),(" open="values (" close=")">
+   		#{menuId},#{roleId},#{lastModifyTime},#{lastModifyUser},
+   		<choose><when test='status != null'>#{status},</when><otherwise>1,</otherwise></choose>
+   		<choose><when test='type != null'>#{type}</when><otherwise>1</otherwise></choose>
+   		</foreach>
+   	</insert>
+  <!-- 删除角色 -->
+   <delete id="deleteEdiRole" parameterType="com.bgi.edims.model.EdiRole" >
+    delete from edi_role
+    <include refid="role_where_filter"></include>
+  </delete>
+  
+  <!-- 修改角色 -->
+  <update id="updateEdiRole" parameterType="com.bgi.edims.model.EdiRole">
+		update edi_role 
+		<set>
+			<if test="roleName != null and roleName != ''">role_name=#{roleName},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{status},</if>
+            <if test="lastModifyTime != null">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where role_id=#{roleId}
+	</update>
+	
+  <!-- 获取角色列表 -->
+  	<select id="getEdiRolesCount" parameterType="com.bgi.edims.model.EdiRole" resultType="java.lang.Integer">
+		select count(1)
+		from edi_role
+		<include refid="role_where_filter"/>
+	</select>
+	<select id="getEdiRoles" parameterType="com.bgi.edims.model.EdiRole" resultMap="RoleResultMap">
+		select role_id,role_name,status,type,last_modify_time,last_modify_user
+		from edi_role
+		<include refid="role_where_filter"/>
+		order by last_modify_time desc
+		<include refid="page_sql_filter"/>
+	</select>
+  	<select id="getBaseEdiRoles" parameterType="com.bgi.edims.model.EdiRole" resultMap="RoleResultMap">
+		select role_id,role_name,status,type,last_modify_time,last_modify_user
+		from edi_role
+		where role_id=#{roleId}
+	</select>
+    <!-- 根据用户ID获取角色列表 -->
+  	<select id="getEdiRolesByUserId" parameterType="com.bgi.edims.model.EdiRole" resultMap="RoleResultMap">
+		select eur.user_id,er.role_id,er.role_name,eur.status,eur.type,eur.last_modify_time,eur.last_modify_user
+		from edi_role er,edi_user_role eur where eur.user_id=#{userId} and eur.role_id=er.role_id
+	</select>
+</mapper>

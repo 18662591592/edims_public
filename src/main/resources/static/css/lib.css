@@ -1,0 +1,364 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, code, form,
+	fieldset, legend, input, button, textarea, p, blockquote, th, td {
+	margin: 0;
+	padding: 0;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+img {
+	border: 0;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+ul, ol {
+	list-style: none;
+}
+
+input, button, textarea, select, optgroup, option {
+	font-family: "Microsoft Yahei", "Simsun";
+	font-size: 100%;
+	outline: none;
+}
+
+.table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.clr:after, .clr:before {
+	display: table;
+	content: "";
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.clr:after {
+	clear: both;
+}
+
+.clr {
+	zoom: 1;
+}
+
+.fll {
+	float: left;
+}
+
+.flr {
+	float: right;
+}
+
+.layout {
+	width: 1000px !important;
+}
+
+.auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.fz12 {
+	font-size: 12px;
+}
+
+.fz14 {
+	font-size: 14px;
+}
+
+.fz16 {
+	font-size: 16px;
+}
+
+.fwb {
+	font-weight: bold;
+}
+
+.fwn {
+	font-weight: normal;
+}
+
+.fsn {
+	font-style: normal;
+}
+
+.tac {
+	text-align: center;
+}
+
+.hover:hover {
+	text-decoration: underline;
+}
+
+.dib {
+	display: inline-block;
+}
+
+.bdib {
+	display: inline-block; +
+	display: inline;
+	zoom: 1;
+}
+
+.vam {
+	vertical-align: middle;
+}
+
+.vat {
+	vertical-align: top;
+}
+
+.wbwr {
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.ico {
+	display: inline-block;
+	background-color: transparent;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+
+.usn {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.table-td-p-r td {
+	padding-right: 10px;
+}
+
+body {
+	font: 14px "Microsoft Yahei", "微软雅黑", 'Simsun', 'Arial';
+}
+
+.min-w-1200 {
+	min-width: 1200px;
+}
+
+.headerWrap {
+	width: 100%;
+	height: 58px;
+	background: #1D70C2;
+	border-bottom: 1px #1761A9 solid;
+	min-width: 1200px;
+	overflow: hidden;
+}
+
+.header {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.navModule, .navItems {
+	float: left;
+}
+
+.logoLink {
+	display: block;
+	width: 120px;
+	height: 58px;
+}
+
+.logoLink img {
+	vertical-align: top;
+}
+
+.navModule li {
+	float: left;
+	display: inline;
+}
+
+.navLink {
+	float: left;
+	width: 144px;
+	height: 58px;
+	color: #fff;
+	font-size: 20px;
+	line-height: 58px;
+	text-align: center;
+}
+
+.navLink:hover, .navLinkCurrent {
+	background: url(../images/icons/rep_nav_item.png) top repeat-y;
+}
+
+.headerRight {
+	float: right;
+	height: 58px;
+	overflow: hidden;
+}
+
+.btnRegister {
+	float: right;
+	height: 58px;
+	padding: 0 0 0 30px;
+	line-height: 58px;
+	font-size: 14px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.usrCenter {
+	display: inline-block;
+	height: 58px;
+	line-height: 58px;
+	color: #fff;
+}
+
+.reged img {
+	vertical-align: middle;
+}
+
+.regOutLink {
+	display: inline-block;
+	background: url(../images/icons/ico_exit.png) left center no-repeat;
+	height: 20px;
+	line-height: 20px;
+	padding: 0 0 0 22px;
+	margin: 0 0 0 10px;
+	vertical-align: middle;
+	color: #fff;
+}
+
+.regOutLink:hover {
+	text-decoration: underline;
+	color: #FF8609;
+}
+
+.logined {
+	float: right;
+	color: #FFFFFC;
+}
+
+.userName {
+	display: inline-block;
+	padding: 0 0 0 5px;
+	font-style: normal;
+	font-size: 14px;
+	height: 60px;
+	line-height: 60px;
+	vertical-align: middle;
+}
+
+.userName a {
+	color: #FFF;
+}
+
+.userName a:hover {
+	text-decoration: underline;
+	color: #FF8609;
+}
+
+.mainWrap {
+	position: relative;
+	width: 100%;
+	background: #F4F4F4;
+	overflow: hidden;
+}
+
+#footerWrap {
+	width: 100%;
+	padding: 10px 0;
+	min-width: 1200px;
+	background: #E2E2E2;
+}
+
+.footerLinkBox {
+	text-align: center;
+	font-size: 0;
+}
+
+.footerLink {
+	color: #808080;
+	font-size: 12px;
+	border-left: 1px solid #808080;
+	padding: 0 14px;
+}
+
+.footerLink:hover {
+	text-decoration: underline;
+	color: #FF8609;
+}
+
+.copyright {
+	font-size: 0;
+	text-align: center;
+	padding: 14px 0 0 0;
+	padding: 8px 0 0 0;
+	margin: 0 0 0 30px;
+}
+
+.copyright span {
+	font-size: 12px;
+	color: #808080;
+	padding: 0 30px 0 0;
+}
+
+.serviceLink {
+	color: #808080;
+}
+
+.pathWidget {
+	height: 45px;
+	border-bottom: 1px #E9E9E9 solid;
+	line-height: 45px;
+	color: #767676;
+}
+
+.pathSpace {
+	font-style: normal;
+	padding: 0 10px;
+}
+
+.pathLink {
+	color: #767676;
+}
+
+.editTipsBox {
+	margin: 10px 0 0;
+	padding: 8px;
+	background: none repeat scroll 0 0 #FED4D5;
+	color: #F00;
+}
+
+.ico-editTips-error {
+	width: 20px;
+	height: 20px;
+	margin: 0 6px 0 0;
+	background-image: url('../images/icons/ico_reg_error.png');
+}
+
+.ico-success-order {
+	width: 63px;
+	height: 62px;
+	margin: 0 5px 0 0;
+	background-image: url('../images/icons/success.png');
+}
+
+.bgDiv {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background-color: #777;
+	filter: progid:DXImageTransform.Microsoft.Alpha(style=3, opacity=25,
+		finishOpacity=75) opacity:.6;
+}
+
+.logo {
+	float: left;
+	width: 120px;
+	height: 58px;
+	background-image: url("../images/icons/icon_all.png");
+	background-repeat: no-repeat;
+	background-position: 0 -563px;
+}

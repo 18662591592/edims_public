@@ -1,0 +1,18 @@
+body{margin:0;padding:0;font-family:Microsoft YaHei,Georgia, "Times New Roman", Times, serif;}
+ul,li{list-style:none;margin:0;padding:0;}
+img{border:none;}
+.DB_tab25{width:100%;height:400px;position:relative;overflow:hidden;}
+.DB_tab25 .DB_bgSet{position:relative;}
+.DB_tab25 .DB_bgSet li{position:absolute;width:100%;height:400px;display:none;}
+.DB_tab25 .DB_imgSet{position:absolute;width:100%;left:37.7%;margin-left:-720px;top:25%}
+.DB_tab25 .DB_imgSet .DB_1_1{position:absolute;left:300px;top:-30px;z-index:3;}
+.DB_tab25 .DB_imgSet .DB_1_2{position:absolute;left:500px;top:-100px;z-index:2;}
+.DB_tab25 .DB_imgSet .DB_2_1{position:absolute;left:200px;top:20px;z-index:3;}
+.DB_tab25 .DB_imgSet .DB_2_2{position:absolute;left:720px;top:20px;z-index:2;}
+.DB_tab25 .DB_imgSet .DB_3_1{position:absolute;left:320px;top:00px;z-index:3;}
+.DB_tab25 .DB_imgSet .DB_3_2{position:absolute;left:352px;top:10px;z-index:2;}
+.DB_tab25 .DB_menuWrap{position:absolute;width:100%;left:50%;margin-left:-50%;}
+.DB_tab25 .DB_menuWrap .DB_menuSet{position:absolute;width:100%;top:370px;text-align:center;font-size:0;z-index:5;}
+.DB_tab25 .DB_menuWrap .DB_menuSet li{cursor:pointer;margin:0 3px;display:inline}
+.DB_tab25 .DB_prev{position:absolute;left:0px;top:170px;cursor:pointer;display:none;z-index:10;}
+.DB_tab25 .DB_next{position:absolute;right:0px;top:170px;cursor:pointer;display:none;z-index:10;}

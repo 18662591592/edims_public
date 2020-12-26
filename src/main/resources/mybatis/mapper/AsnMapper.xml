@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgi.edims.mapper.AsnMapper" >
+  <resultMap id="AsnrResultMap" type="com.bgi.edims.model.EdiAsn" >
+    <id column="asn_id" property="asnId" jdbcType="VARCHAR" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="download_times" property="downloadTimes" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+    <association property="supplier" column="{supplierCode=supplier_code}" select="com.bgi.edims.mapper.SupplierMapper.getEdiSuppliers"/>
+    <association property="uploadUser" column="{userId=user_id}" select="com.bgi.edims.mapper.UserMapper.getBaseEdiUsers"/>
+  </resultMap>
+    <sql id="page_sql_filter">
+  		<if test="rows != null" >
+		limit #{startIndex},#{rows}
+		</if>
+  </sql>
+  <!-- ############# -->
+  <!-- ASN相关sqlMap -->
+  <!-- ############# -->
+  <sql id="asn_where_filter">
+  		<where>
+		<if test="asnId != null  and asnId != ''">and asn_id=#{asnId}</if>
+		<if test="supplierCode != null  and supplierCode != ''">and supplier_code=#{supplierCode}</if>
+		<if test="userId != null and userId != ''">and user_id=#{userId}</if>
+		<if test="fileName != null and fileName != ''">and file_name like '%${fileName}%'</if>
+		<if test="fileUrl != null and fileUrl != ''">and file_url like '%${fileUrl}%'</if>
+		<if test="status != null and status != ''">and status=#{status}</if>
+		<if test="type != null and type != ''">and type=#{type}</if>
+		<if test="uploadStartTime != null and uploadStartTime != ''">
+			<![CDATA[and upload_time >= #{uploadStartTime,jdbcType=TIMESTAMP}]]>
+		</if>
+		<if test="uploadEndTime != null and uploadEndTime != ''">
+			<![CDATA[and upload_time <= #{uploadEndTime,jdbcType=TIMESTAMP}]]>
+		</if>
+		</where>
+  </sql>
+  
+  <!-- 增加ASN -->
+	<insert id="createEdiAsn" parameterType="com.bgi.edims.model.EdiAsn" >
+   		INSERT INTO edi_asn
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="asnId != null">asn_id,</if>
+			<if test="fileName != null">file_name,</if>
+			<if test="fileUrl != null">file_url,</if>
+			<if test="supplierCode != null">supplier_code,</if>
+			<if test="uploadTime != null">upload_time,</if>
+			<if test="downloadTimes != null">download_times,</if>
+			<if test="userId != null">user_id,</if>
+			<if test="status != null">status,</if>
+			<if test="type != null">type,</if>
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="lastModifyUser != null">last_modify_user,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="asnId != null">#{asnId},</if>
+			<if test="fileName != null">#{fileName},</if>
+			<if test="fileUrl != null">#{fileUrl},</if>
+			<if test="supplierCode != null">#{supplierCode},</if>
+			<if test="uploadTime != null">#{uploadTime},</if>
+			<if test="downloadTimes != null">#{downloadTimes},</if>
+			<if test="userId != null">#{userId},</if>
+			<if test="status != null">#{status},</if>
+			<if test="type != null">#{type},</if>
+			<if test="lastModifyTime != null">#{lastModifyTime},</if>
+			<if test="lastModifyUser != null">#{lastModifyUser},</if>
+		</trim>
+   	</insert>
+  
+  <!-- 删除ASN -->
+   <delete id="deleteEdiAsn" parameterType="com.bgi.edims.model.EdiAsn" >
+    delete from edi_asn
+    <include refid="asn_where_filter"></include>
+  </delete>
+
+  <!-- 修改ASN -->
+  <update id="updateEdiAsn" parameterType="com.bgi.edims.model.EdiAsn">
+		update edi_asn 
+		<set>
+			<if test="fileName != null and fileName != ''">file_name=#{fileName},</if>
+			<if test="fileUrl != null and fileUrl != ''">file_url=#{fileUrl},</if>
+			<if test="supplierCode != null and supplierCode != ''">supplier_code=#{supplierCode},</if>
+			<if test="uploadTime != null">upload_time=#{uploadTime},</if>
+			<if test="downloadTimes != null and downloadTimes != ''">download_times=#{downloadTimes},</if>
+			<if test="userId != null and userId != ''">user_id=#{userId},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{type},</if>
+            <if test="lastModifyTime != null">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where asn_id=#{asnId}
+	</update>
+	
+  <!-- 获取ASN列表 -->
+    <select id="getEdiAsnsCount" parameterType="com.bgi.edims.model.EdiAsnRequest" resultType="java.lang.Integer">
+		select count(1)
+		from edi_asn
+		<include refid="asn_where_filter"/>
+	</select>
+	
+  	<select id="getEdiAsns" parameterType="com.bgi.edims.model.EdiAsnRequest" resultMap="AsnrResultMap">
+		select asn_id,file_name,file_url,supplier_code,upload_time,user_id,download_times,status,type,last_modify_time,last_modify_user
+		from edi_asn
+		<include refid="asn_where_filter"/>
+		order by last_modify_time desc
+		<include refid="page_sql_filter"/>
+	</select>
+	
+    <select id="getEdiAsnsByAsnIds" parameterType="Object" resultMap="AsnrResultMap">
+		select asn_id,file_name,file_url,supplier_code,upload_time,user_id,download_times,status,type,last_modify_time,last_modify_user
+		from edi_asn
+		where asn_id in
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">                               #{item}
+        </foreach>
+	</select>
+	
+	<delete id="deleteEdiAsns" parameterType="Object" >
+    delete from edi_asn
+		where asn_id in
+		<foreach collection="array" index="index" item="item" open="(" separator="," close=")">                               #{item}
+        </foreach>
+    </delete>
+  
+  
+</mapper>

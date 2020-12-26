@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/highcharts.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/modules/map.js"></script>
+<link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/comboboxInit.js"></script>
+<script type="text/javascript" src="/js/edi-common.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/edijs/changepwd.js"></script>
+<style>
+.center {
+	width: 280px;
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+</head>
+<body >
+
+<div class="main_panel">
+	 <form >
+
+	    	<table  cellpadding="5" style="text-align:right;padding:5px" >
+	    		<tr>
+	    			<td>密码 </td>
+	    			<td><input id="password" name="password" validType="length[4,32]" class="easyui-validatebox" required="true" type="password" value=""/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>确认密码</td>
+	    			<td><input type="password" name="repassword" id="repassword" required="true" class="easyui-validatebox"  validType="equalTo['#password']" invalidMessage="两次输入密码不匹配"/></td>
+	    		</tr>
+	    		<tr>
+	    		<td></td>
+	    		<td><a href="javascript:void(0)" iconcls="icon-save" class="easyui-linkbutton" onclick="changePwd()">确认修改</a></td>
+	    		</tr>
+	    	</table>
+	   </form>
+
+</div>
+
+
+
+
+</body>
+</html>

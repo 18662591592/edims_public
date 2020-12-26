@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/highcharts.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/modules/map.js"></script>
+<link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/comboboxInit.js"></script>
+<script type="text/javascript" src="/js/edi-common.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/edijs/supplier.js"></script>
+</head>
+<body >
+	<div id="mainPanle" class="easyui-layout" style="overflow: hidden;" fit="true">
+		<div class="searchInfo" data-options="region:'north',border:false" style="height:80px">
+			<div  title="查询条件" class="easyui-panel" border=true style="width: 100%; border: 0px;">
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 150px;">供应商名称:</td>
+						<td><select id="supplier_combobox" class="easyui-combobox" data-options="panelHeight:'auto'"
+							style="width: 150px;" editable=true></select></td>
+
+						<td align="right" style="width: 90px;">联系人:</td>
+						<td><input id="linkman_name_textbox" class="easyui-textbox" type="text"  data-options="panelHeight:'auto'"></input></td>
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="supplierDatagridReload()"
+							iconcls="icon-search">查询</a></td>
+							
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="supplierDialogOpen()"
+							iconcls="icon-add">新增</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div  data-options="region:'center'" >
+		<div id="suppliers_datagrid" class="easyui-layout" style="margin: 0 auto;">
+		</div>
+		</div>
+	</div>
+	<div id="supplier_edit_dialog" class="easyui-dialog" closed="true" modal='true'>
+	    <form id="supplier_edit_form" method="post" action="/intf/commonintf?method=updateEdiSupplier">
+	    	<table cellpadding="5" >
+	    	<tr>
+	    	<td><input class="easyui-textbox" type="hidden" id="supplierId" name="supplierId" ></input></td>
+	    	</tr>
+	    		<tr>
+	    			<td>供应商编码</td>
+	    			<td><input class="easyui-textbox" type="text" id="supplierCode" name="supplierCode" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>供应商名称:</td>
+	    			<td><input class="easyui-textbox" type="text" id="supplierName" name="supplierName" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>地址:</td>
+	    			<td><input class="easyui-textbox" type="text" id="supplierAddr" name="supplierAddr" ></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>联系人:</td>
+	    			<td><input class="easyui-textbox" type="text" id="linkmanName" name="linkmanName" ></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>联系电话:</td>
+	    			<td><input class="easyui-textbox" type="text" id="linkmanMobile" name="linkmanMobile" ></input></td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" iconcls="icon-save" class="easyui-linkbutton" onclick="supplierEditFormSubmit()">保存</a>
+	    </div>
+	</div>
+	<div id="menu" class="easyui-menu" style="width:100px;display: none">   
+      <div iconCls="icon-delete" onclick="deleteSupplier()">删除</div>      
+    </div>
+</body>
+</html>

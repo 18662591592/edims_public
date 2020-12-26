@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgi.edims.mapper.SysConfigMapper" >
+  <resultMap id="SysConfigResultMap" type="com.bgi.edims.model.EdiSysConfig" >
+    <id column="config_key" property="configKey" jdbcType="VARCHAR" />
+    <result column="config_value" property="configValue" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="page_sql_filter">
+  		<if test="rows != null" >
+		limit #{startIndex},#{rows}
+		</if>
+  </sql>
+  <!-- ############# -->
+  <!-- 系统配置相关sqlMap -->
+  <!-- ############# -->
+  <sql id="sysconf_where_filter">
+  		<where>
+		<if test="configKey != null">and config_key=#{configKey}</if>
+		<if test="configValue != null">and config_value=#{configValue}</if>
+		<if test="status != null">and status=#{status}</if>
+		<if test="type != null">and type=#{type}</if>
+		</where>
+  </sql>
+  
+  <!-- 增加系统配置 -->
+	<insert id="createEdiSysConfig" parameterType="com.bgi.edims.model.EdiSysConfig" >
+   		INSERT INTO edi_sys_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="configKey != null">config_key,</if>
+			<if test="configValue != null">config_value,</if>
+			<if test="status != null">status,</if>
+			<if test="type != null">type,</if>
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="lastModifyUser != null">last_modify_user,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="configKey != null">#{configKey},</if>
+			<if test="configValue != null">#{configValue},</if>
+			<if test="status != null">#{status},</if>
+			<if test="type != null">#{type},</if>
+			<if test="lastModifyTime != null">#{lastModifyTime},</if>
+			<if test="lastModifyUser != null">#{lastModifyUser},</if>
+		</trim>
+   	</insert>
+  
+  <!-- 删除系统配置 -->
+   <delete id="deleteEdiSysConfig" parameterType="com.bgi.edims.model.EdiSysConfig" >
+    delete from edi_sys_config
+    <include refid="sysconf_where_filter"></include>
+  </delete>
+  
+  <!-- 修改系统配置 -->
+  <update id="updateEdiSysConfig" parameterType="com.bgi.edims.model.EdiSysConfig">
+		update edi_sys_config 
+		<set>
+			<if test="configValue != null and configValue != ''">config_value=#{configValue},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{status},</if>
+            <if test="lastModifyTime != null ">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where config_key=#{configKey}
+	</update>
+	
+  <!-- 获取系统配置列表 -->
+  	<select id="getEdiSysConfigs" parameterType="com.bgi.edims.model.EdiSysConfig" resultMap="SysConfigResultMap">
+		select config_key,config_value,status,type,last_modify_time,last_modify_user
+		from edi_sys_config
+		<include refid="sysconf_where_filter"/>
+		order by last_modify_time desc
+		<include refid="page_sql_filter"/>
+	</select>
+  
+</mapper>

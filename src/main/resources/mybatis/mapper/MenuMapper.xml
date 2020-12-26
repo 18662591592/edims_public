@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgi.edims.mapper.MenuMapper" >
+  <resultMap id="MenuResultMap" type="com.bgi.edims.model.EdiMenu" >
+    <id column="menu_id" property="menuId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_desc" property="menuDesc" jdbcType="VARCHAR" />
+    <result column="role_query" property="query" jdbcType="BOOLEAN" />
+    <result column="role_create" property="create" jdbcType="BOOLEAN" />
+    <result column="role_update" property="update" jdbcType="BOOLEAN" />
+    <result column="role_delete" property="delete" jdbcType="BOOLEAN" />
+    <result column="role_upload" property="upload" jdbcType="BOOLEAN" />
+    <result column="role_download" property="download" jdbcType="BOOLEAN" />
+    <result column="menu_icon" property="icon" jdbcType="VARCHAR" />
+    <result column="menu_url" property="url" jdbcType="VARCHAR" />
+    <result column="menu_group" property="group" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="page_sql_filter">
+  		<if test="rows != null" >
+		limit #{startIndex},#{rows}
+		</if>
+  </sql>
+  
+  <!-- ############# -->
+  <!-- 模块相关sqlMap -->
+  <!-- ############# -->
+  <sql id="menu_where_filter">
+  		<where>
+		<if test="menuId != null">and menu_id=#{menuId}</if>
+		<if test="menuName != null">and menu_name=#{menuName}</if>
+		<if test="menuDesc != null">and menu_desc like '%${menuDesc}%'</if>
+		<if test="status != null">and status=#{status}</if>
+		<if test="type != null">and type=#{type}</if>
+		</where>
+  </sql>
+  
+  <!-- 增加模块-->
+	<insert id="createEdiMenu" parameterType="com.bgi.edims.model.EdiMenu" >
+   		INSERT INTO edi_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="menuId != null">menu_id,</if>
+			<if test="menuName != null">menu_name,</if>
+			<if test="menuDesc != null">menu_desc,</if>
+			<if test="status != null">status,</if>
+			<if test="type != null">type,</if>
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="lastModifyUser != null">last_modify_user,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="menuId != null">#{menuId},</if>
+			<if test="menuName != null">#{menuName},</if>
+			<if test="menuDesc != null">#{menuDesc},</if>
+			<if test="status != null">#{status},</if>
+			<if test="type != null">#{type},</if>
+			<if test="lastModifyTime != null">#{lastModifyTime},</if>
+			<if test="lastModifyUser != null">#{lastModifyUser},</if>
+		</trim>
+   	</insert>
+  
+  	<insert id="createEdiRoleMenus" parameterType="Object" >
+   		Replace INTO edi_role_menu(menu_id,role_id,role_query,role_create,role_update,role_delete,role_upload,role_download,last_modify_time,last_modify_user,status,type)
+   		<foreach collection="list" index="index" item="item" separator="),(" open="values (" close=")">
+   		#{item.menuId},#{item.roleId},
+   		<choose><when test='item.query != null'>#{item.query},</when><otherwise>0,</otherwise></choose>
+   		<choose><when test='item.create != null'>#{item.create},</when><otherwise>0,</otherwise></choose>
+   		<choose><when test='item.update != null'>#{item.update},</when><otherwise>0,</otherwise></choose>
+   		<choose><when test='item.delete != null'>#{item.delete},</when><otherwise>0,</otherwise></choose>
+   		<choose><when test='item.upload != null'>#{item.upload},</when><otherwise>0,</otherwise></choose>
+   		<choose><when test='item.download != null'>#{item.download},</when><otherwise>0,</otherwise></choose>
+   		#{item.lastModifyTime},#{item.lastModifyUser},
+   		<choose><when test='item.status != null'>#{item.status},</when><otherwise>1,</otherwise></choose>
+   		<choose><when test='item.type != null'>#{item.type}</when><otherwise>1</otherwise></choose>
+   		</foreach>
+   	</insert>
+  <delete id="deleteEdiRoleMenus" parameterType="com.bgi.edims.model.EdiRole" >
+    delete from edi_role_menu
+    where role_id=#{roleId}
+  </delete>
+  <!-- 删除模块 -->
+   <delete id="deleteEdiMenu" parameterType="com.bgi.edims.model.EdiMenu" >
+    delete from edi_menu
+    <include refid="menu_where_filter"></include>
+  </delete>
+  
+  <!-- 修改模块 -->
+  <update id="updateEdiMenu" parameterType="com.bgi.edims.model.EdiMenu">
+		update edi_menu 
+		<set>
+			<if test="menuName != null and menuName != ''">menu_name=#{menuName},</if>
+			<if test="menuDesc != null and menuDesc != ''">menu_desc=#{menuDesc},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{status},</if>
+            <if test="lastModifyTime != null ">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where menu_id=#{menuId}
+	</update>
+	
+	  <update id="updateEdiRoleMenu" parameterType="com.bgi.edims.model.EdiMenu">
+		update edi_role_menu 
+		<set>
+		<if test="query != null">role_query=#{query},</if>
+		<if test="create != null">role_create=#{create},</if>
+		<if test="update != null">role_update=#{update},</if>
+		<if test="delete != null">role_delete=#{delete},</if>
+		<if test="upload != null">role_upload=#{upload},</if>
+		<if test="download != null">role_download=#{download},</if>
+			<if test="menuName != null and menuName != ''">menu_name=#{menuName},</if>
+			<if test="menuDesc != null and menuDesc != ''">menu_desc=#{menuDesc},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{status},</if>
+            <if test="lastModifyTime != null ">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where menu_id=#{menuId} and role_id=#{roleId}
+	</update>
+  <!-- 获取模块列表 -->
+    <select id="getEdiMenusCount" parameterType="com.bgi.edims.model.EdiMenu" resultType="java.lang.Integer">
+		select count(1)
+		from edi_menu
+		<include refid="menu_where_filter"/>
+	</select>
+	
+  	<select id="getEdiMenus" parameterType="com.bgi.edims.model.EdiMenu" resultMap="MenuResultMap">
+		select menu_id,menu_name,menu_desc,status,type,last_modify_time,last_modify_user
+		from edi_menu
+		<include refid="menu_where_filter"/>
+		order by last_modify_time desc
+		<include refid="page_sql_filter"/>
+	</select>
+	
+	<!-- 根据角色ID获取菜单权限列表 -->
+	<select id="getEdiMenusByRoleId" parameterType="com.bgi.edims.model.EdiMenu" resultMap="MenuResultMap">
+		select erm.role_id,erm.role_query,erm.role_create,erm.role_update,erm.role_delete,erm.role_upload,erm.role_download,em.menu_icon,em.menu_url,em.menu_group,em.menu_id,em.menu_name,em.menu_desc,erm.status,erm.type,erm.last_modify_time,erm.last_modify_user
+		from edi_menu em,edi_role_menu erm 
+		where erm.role_id=#{roleId} and em.menu_id=erm.menu_id
+	</select>
+  
+</mapper>

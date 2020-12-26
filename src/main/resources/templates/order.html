@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/highcharts.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/modules/map.js"></script>
+<link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/comboboxInit.js"></script>
+<script type="text/javascript" src="/js/edi-common.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/edijs/order.js"></script>
+</head>
+<body>
+
+	<div id="mainPanle" class="easyui-layout"  style="overflow: hidden;" fit="true">
+		<div class="searchInfo" data-options="region:'north',title:'查询条件'" style="height:160px">
+
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 100px;">供应商名称:</td>
+						<td><select id="supplier_combobox" class="easyui-combobox" data-options="panelHeight:'auto'"
+							style="width: 100px;" editable=true></select></td>
+						<td align="right" style="width: 100px;">是否下载:</td>
+						<td><select id="isdownloaded_combobox" class="easyui-combobox" style="width: 80px;">
+						<option value="">全部</option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+						</select></td>
+					</tr>					
+				</table>
+			
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 100px;">上传时间:</td>
+						<td><input id="upload_start_datetimebox" class="easyui-datetimebox"  style="width:100px"></td>
+						<td>~</td>
+						<td><input id="upload_end_datetimebox" class="easyui-datetimebox"  style="width:100px"></td>
+						
+
+					</tr>					
+				</table>
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 90px;">下载时间:</td>
+						<td><input id="download_start_datetimebox" class="easyui-datetimebox"  style="width:100px"></td>
+						<td>~</td>
+						<td><input id="download_end_datetimebox" class="easyui-datetimebox"  style="width:100px"></td>
+					</tr>
+				</table>
+				
+				<table align="left" class="searchTable">
+					<tr>
+
+						<td align="center" style="width: 80px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="orderDatagridReload()"
+							iconcls="icon-search">查询</a></td>
+						<td><input id="type_textbox" class="easyui-textbox" type="hidden"  value='2' ></input></td>
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 100px;"
+							onclick="syncOrder()"
+							iconcls="icon-refresh">手工同步</a></td>
+					</tr>
+				</table>
+		</div>
+		<div  data-options="region:'center'" >
+		<div id="order_datagrid" class="easyui-layout" style="margin: 0 auto;">
+		</div>
+		</div>
+	</div>
+	
+	<div id="menu" class="easyui-menu" style="width:100px;display: none">   
+      <div iconCls="icon-download" onclick="downloadOrders()">下载</div>   
+      <div iconCls="icon-delete" onclick="deleteOrders()">删除</div>      
+    </div>
+</body>
+</html>

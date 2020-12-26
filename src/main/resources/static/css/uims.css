@@ -1,0 +1,69 @@
+/*-------------------------------------------------------
+ All Rights Reserved, Copyright (C) 2013, Wuyeguo, Ltd.
+-------------------------------------------------------*/
+*{font-size:12px; font-family:Tahoma,Verdana,微软雅黑,新宋体}
+
+body { font:12px/1.2em Microsoft YaHei;}
+
+a,
+a:link { color:#000; text-decoration:none; outline:none;}
+a:hover,
+a:focus { text-decoration:none; color:#39f;}
+
+.pd3 { padding:3px;}
+.pd5 { padding:5px;}
+.pd10 { padding:10px;}
+
+label,
+button,
+input,
+select,
+textarea { font-size:12px; vertical-align: middle;}
+
+input,
+button,
+select,
+textarea { font:12px/1.2em Microsoft YaHei;}
+
+select,
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="radio"],
+input[type="checkbox"] { cursor: pointer;}
+
+.tabs-tool { border-top:0;}
+.uims-text,
+.uims-textarea { padding:3px; border:1px #95b8e7 solid; width:260px;}
+.uims-text { height:14px; line-height:14px; }
+
+.uims-header-right { position:absolute; z-index:0; right:5px; top:0; text-align:right;}
+.uims-header-right a { color:blue; margin:0 5px;}
+.header-center {width:100%;left:300px; top:0; text-align:left;}
+.uims-sidebar { width:200px;}
+.uims-side-tree .tree-node { padding:3px 0px; }
+.uims-side-tree a { display:block;}
+.uims-side-tree .tree-node-selected { padding:2px 0; border:1px #fade23 solid;}
+
+.uims-toolbar-button,
+.uims-toolbar-search { padding:3px 5px;}
+
+.uims-footer { height:20px; padding:5px; text-align:center; overflow:hidden; background:#e0ecff;}
+
+.fullTable{width:100%;}
+.fullTable input.wd100{width:100%;}
+.fullTable td{height:26px;line-height:26px;}
+.tr{text-align:right;}
+.uims-dialog{ 
+	padding-top:20px;
+	padding-left:10px;
+	padding-right:50px;
+}
+.layout-split-north{border-bottom:none;}
+.iconPos{position:fixed;right:20px;width:50px;height:100px;top:50%;margin-top:-50px;}
+.addBtn,.saveBtn{width:50px;height:50px;display:block;}
+.addBtn{background:url(../images/add.png) no-repeat left top;}
+.saveBtn{background:url(../images/save.png) no-repeat left top;}
+.addBtn:hover{background:url(../images/add2.png) no-repeat left top;}
+.saveBtn:hover{background:url(../images/save2.png) no-repeat left top;}

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>邮件发送设置</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/highcharts.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/modules/map.js"></script>
+<link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/comboboxInit.js"></script>
+<script type="text/javascript" src="/js/edi-common.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/edijs/email.js"></script>
+</head>
+<body >
+
+<div class="main_panel">
+	 <form id="supplier_edit_form" method="post" action="/intf/commonintf?method=updateEdiSupplier">
+
+	    	<table cellpadding="5" style="text-align:right;padding:5px" >
+	    		<tr>
+	    			<td>邮箱服务器 </td>
+	    			<td><input class="easyui-textbox" type="text" id="emailhost" name="emailhost"  ></input></td>
+	    			<td><a href="javascript:void(0)" iconcls="icon-help" class="easyui-linkbutton" onclick="updateEmailConfig()"></a> </td>
+	    		</tr>
+	    		<tr><td></td><td><hr class="hr0" /></td></tr>
+	    		<tr>
+	    			<td>端口:</td>
+	    			<td><input class="easyui-textbox" type="text" id="emailport" name="emailport"  ></input></td>
+	    			<td><a href="javascript:void(0)" iconcls="icon-help" class="easyui-linkbutton" onclick="updateEmailConfig()"></a> </td>
+	    		</tr>
+	    		<tr><td></td><td><hr class="hr0" /></td></tr>
+	    		<tr>
+	    			<td>发送邮箱:</td>
+	    			<td><input class="easyui-textbox" type="text" id="emailaddr" name="emailaddr"  ></input></td>
+	    		</tr>
+	    		<tr><td></td><td><hr class="hr0" /></td></tr>
+	    		<tr>
+	    			<td>邮箱授权码:</td>
+	    			<td><input class="easyui-textbox" type="text" id="emailpwd" name="emailpwd"  ></input></td>
+	    		</tr>
+	    		<tr><td></td><td><hr class="hr0" /></td></tr>
+	    		<tr>
+						<td align="right" style="width: 150px;">提醒邮件发送频率:</td>
+						<td><select id="email_scan_interval" class="easyui-combobox" data-options="editable:false" style="width: 150px;">
+						<option value="99">关闭</option>
+						<option value="1">每小时</option>
+						<option value="2">每两个小时</option>
+						<option value="3">每三个小时</option>
+						<option value="4">每四个小时</option>
+						<option value="6">每六个小时</option>
+						<option value="12">每半天</option>
+						<option value="24">每天</option>
+						<option value="0">实时</option>
+						</select></td>	
+	    		</tr>
+	    		<tr><td></td><td><hr class="hr0" /></td></tr>
+	    		<tr>
+						<td align="right" style="width: 150px;">错误邮件发送频率:</td>
+						<td><select id="error_email_interval" class="easyui-combobox" data-options="editable:false,disabled:true" style="width: 150px;">
+						<option value="99">关闭</option>
+						<option value="1">每小时</option>
+						<option value="2">每两个小时</option>
+						<option value="3">每三个小时</option>
+						<option value="4">每四个小时</option>
+						<option value="6">每六个小时</option>
+						<option value="12">每半天</option>
+						<option value="24">每天</option>
+						<option value="0">实时</option>
+						</select></td>	
+	    		</tr>
+	    		<tr>
+	    		<td><a href="javascript:void(0)" iconcls="icon-save" class="easyui-linkbutton" onclick="updateEmailConfig()">保存</a></td>
+	    		<td><a href="javascript:void(0)" iconcls="icon-path-test" class="easyui-linkbutton" onclick="testEmailConfig()">测试</a></td>
+	    		</tr>
+	    	</table>
+	   </form>
+
+</div>
+
+
+
+
+</body>
+</html>

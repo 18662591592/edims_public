@@ -1,0 +1,354 @@
+.loginWidget {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	height: 0;
+	z-index: 9999;
+}
+
+.loginBox {
+	position: absolute;
+	top: 45px;
+	right: 24%;
+	width: 290px;
+	height: 310px;
+}
+
+.loginTip {
+	position: absolute;
+	top: 14px;
+	left: 14px;
+	z-index: 10;
+	width: 250px;
+	height: 40px;
+	padding: 0 6px;
+	background: #fff5da;
+	color: #f63535;
+	line-height: 38px;
+}
+
+.loginMaske {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background: #ffffff;
+	opacity: .70;
+	filter: alpha(opacity = 50);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.login {
+	position: relative;
+	padding: 0 14px;
+}
+
+.login h2 {
+	padding: 20px 0 15px 0;
+	border-bottom: 1px #787878 solid;
+	text-align: center;
+	font-size: 18px;
+	font-weight: normal;
+	color: #5f5f5f;
+}
+
+.loginFilds {
+	position: relative;
+	margin: 20px 0;
+	padding: 0 5px;
+	_width: 100%;
+	zoom: 1;
+}
+
+.loginFildsMask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 102px;
+	background: #5f5f5f;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.loginField {
+	position: relative;
+	border: none;
+	background-color: #5f5f5f;
+	background-position: 4px center;
+	background-repeat: no-repeat;
+	height: 50px;
+	width: 204px;
+	padding: 0 4px 0 46px;
+	font-size: 14px;
+	color: #d2d2d2;
+	line-height: 50px \9; +
+	float: left;
+}
+
+.loginUsr {
+	border-bottom: 0.5px #555555 solid;
+}
+
+.loginPw {
+	border-top: 1px #808080 solid;
+}
+
+.remeberFind {
+	font-size: 0;
+	margin: 0 0 25px 0;
+}
+
+.ico-remeber, .remeberTxt, .findPwLink {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	color: #f5f5f5;
+}
+
+.remeberTxt {
+	margin: 0 16px 0 8px;
+}
+
+.ico-remeber {
+	width: 21px;
+	height: 20px;
+	background: url(../images/icons/ico_remeber.png) center no-repeat;
+	cursor: pointer;
+}
+
+.ico-remebered {
+	background-image: url(../images/icons/ico_remebered.png);
+}
+
+.loginPost, .homeRegLink {
+	width: 260px;
+	height: 48px;
+	line-height: 48px;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.loginPost {
+	background: #abd7f7;
+	border: none;
+}
+
+.loginPost:hover {
+	background: url(../images/icons/rep_login_post.png) top repeat-x;
+}
+
+.homeRegLink {
+	background: #ff982a;
+}
+
+.homeRegLink:hover {
+	background: url(../images/icons/rep_login_reg.png) top repeat-x;
+}
+
+.gridWidget {
+	background: #F4F4F4 url(../images/icons/rep_gray.png) top repeat-x;
+}
+
+.gridBox {
+	width: 1260px;
+	padding: 25px 0;
+}
+
+.gridItems li {
+	float: left;
+	width: 420px;
+	border-bottom: none;
+	padding: 0 0 15px 0;
+	background: url(../images/icons/bg_grid.png) center bottom no-repeat;
+}
+
+.gridItem {
+	width: 375px;
+	border: 1px #F7F7F7 solid;
+	margin: 0 0 0 15px;
+	background: #fff;
+}
+
+.gridItemTit {
+	padding: 10px;
+	border-bottom: 3px #4A90D0 solid;
+	font-size: 20px;
+}
+
+.gridItemTit-0 {
+	color: #4390d2;
+}
+
+.gridItemTit-1 {
+	color: #5db41e;
+	border-color: #5db41e;
+}
+
+.gridItemTit-2 {
+	color: #ff863d;
+	border-color: #ff863d;
+}
+
+.ico-grid {
+	width: 32px;
+	height: 26px;
+	margin: 0 10px 0 0;
+	background-position: 0 center;
+	background-repeat: no-repeat;
+}
+
+.ico-grid-0 {
+	width: 32px;
+	height: 26px;
+	background-image: url(../images/icons/icon_all.png);
+	background-repeat: no-repeat;
+	background-position: -1px -731px;
+}
+
+.ico-grid-1 {
+	width: 32px;
+	height: 28px;
+	background-image: url(../images/icons/icon_all.png);
+	background-repeat: no-repeat;
+	background-position: 0 -775px;
+	background-repeat: no-repeat;
+}
+
+.ico-grid-2 {
+	width: 32px;
+	height: 26px;
+	background-image: url(../images/icons/icon_all.png);
+	background-repeat: no-repeat;
+	background-position: 2px -825px;
+	background-repeat: no-repeat;
+}
+
+.gridContent {
+	padding: 10px;
+}
+
+.gridContent dd {
+	width: 190px;
+	margin: 0 0 0 6px;
+	line-height: 20px;
+	color: #2a2a2a;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.gridContent dl {
+	padding: 0 0 10px 0;
+	background: url(../images/icons/ico_line.png) bottom center no-repeat;
+}
+
+.gridDeltail {
+	color: #ff9c0f;
+}
+
+.gridBtns {
+	padding: 10px 0 0 0;
+}
+
+.gridBtnL, .gridBtnR, .gridBtnDisable {
+	width: 158px;
+	height: 48px;
+	font-size: 20px;
+	line-height: 48px;
+	text-align: center;
+	color: #fff;
+	display: inline-block;
+}
+
+.gridBtnDisable {
+	display: block;
+	width: 236px;
+	margin: 0 auto;
+	background: #cdcdcd;
+}
+
+.gridBtnL {
+	background: #0071c5;
+}
+
+.gridBtnR {
+	background: #ff9c0f;
+}
+
+.gridBtnL:hover {
+	background: #138feb;
+}
+
+.gridBtnR:hover {
+	background: #ffb30f;
+}
+
+.ico-gridBtn {
+	width: 24px;
+	height: 48px;
+	margin: 0 4px 0 0;
+	background-position: 0 center;
+	background-repeat: no-repeat;
+}
+
+.gridBtnL .ico-gridBtn {
+	background-image: url(../images/icons/icon_all.png);
+	background-position: -1px -529px;
+	width: 24px;
+	height: 20px;
+}
+
+.gridBtnR .ico-gridBtn {
+	background-image: url(../images/icons/icon_all.png);
+	background-position: -1px -483px;
+	width: 15px;
+	height: 25px;
+}
+
+.focusWidget {
+	height: 384px;
+	overflow: hidden;
+	background: #58A7E0;
+	border-top: 1px #2C67AB solid;
+}
+
+.focusItems li {
+	height: 384px;
+	background: url(../images/icons/pic_focus_0.png) top center no-repeat;
+}
+
+.sequenceLogo {
+	float: left;
+	width: 158px;
+	height: 96px;
+	background-image: url("../images/icons/pic_order_0.jpg");
+}
+
+.oligoLogo {
+	float: left;
+	width: 158px;
+	height: 96px;
+	background-image: url("../images/icons/pic_order_1.jpg");
+}
+
+.ngsLogo {
+	float: left;
+	width: 158px;
+	height: 96px;
+	background-image: url("../images/icons/pic_order_2.jpg");
+}

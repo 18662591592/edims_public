@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="/images/icons/uams.ico" type="image/x-icon" />
+<title>EDIMS</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script> 
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+</head>
+<style>
+
+</style>
+<script th:inline="javascript">
+$(function(){
+	var menus=[[${menus}]];
+	var ordermenus={
+			"menuid": "10",
+			"icon": "icon-order-manager",
+			"menuname": "订单管理",
+			"menus": []
+		};
+	var usermenus={
+			"menuid": "20",
+			"icon": "icon-auth",
+			"menuname": "用户管理",
+			"url": "order",
+			"menus": []
+		};
+	var systemmenus={
+			"menuid": "30",
+			"icon": "icon-setting",
+			"menuname": "系统设置",
+			"menus": []
+		}
+	if(menus){
+		for(var i=0;i<menus.length;i++){
+			var menu=menus[i];
+			if(menu.group=='10'&&menu.query){
+				ordermenus.menus.push({
+					"menuid": menu.menuId,
+					"menuname": menu.menuName,
+					"icon": menu.icon,
+					"url": menu.url
+				})
+			}
+			if(menu.group=='20'&&menu.query){
+				usermenus.menus.push({
+					"menuid": menu.menuId,
+					"menuname": menu.menuName,
+					"icon":menu.icon,
+					"url": menu.url
+				})
+			}
+			if(menu.group=='30'&&menu.query){
+				systemmenus.menus.push({
+					"menuid": menu.menuId,
+					"menuname": menu.menuName,
+					"icon": menu.icon,
+					"url": menu.url
+				})
+			}
+		}
+	}
+	systemmenus.menus.push({
+		"menuid": "41",
+		"menuname":"修改密码",
+		"icon": "icon-key",
+		"url": "changepwd"
+	});
+	var _menus = {"menus": []};
+	if(ordermenus.menus.length>0){
+		_menus.menus.push(ordermenus);
+	}
+	if(usermenus.menus.length>0){
+		_menus.menus.push(usermenus);
+	}
+	if(systemmenus.menus.length>0){
+		_menus.menus.push(systemmenus);
+	}
+	
+	InitLeftMenu(_menus);
+	
+})
+
+	
+function startTime(){
+    var today=new Date()
+    var week=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+    var year=today.getFullYear()
+    var month=today.getMonth()+1
+    var date=today.getDate()
+    var day=today.getDay()
+    var h=today.getHours()
+    var m=today.getMinutes()
+    var s=today.getSeconds()
+    // add a zero in front of numbers<10
+    h=checkTime(h)
+    m=checkTime(m)
+    s=checkTime(s)
+    document.getElementById('time').innerHTML=" "+year+"年"+month+"月"+date+"日  "+week[day]+"  "+h+":"+m+":"+s+" "
+    t=setTimeout('startTime()',500)
+   };
+   
+   function checkTime(i){
+   if (i<10)  
+     {i="0" + i}
+     return i
+   };
+</script>
+<style type="text/css">
+.indextab img{width:100%;height:100%;}
+.header_bg{ display:block; clear:both; background: url(/images/bg.png) repeat-x; height:90px;}
+.font1{ color:#a5a5a5; font-size:12px; text-shadow:#fff 1px 1px 0px}
+.font2{ color:#221e1f; font-size:16px;}
+.font3{ 
+margin:0 35px;
+text-align:center 
+font:50px/1.2em Microsoft YaHei;
+color:#ccb8bd;
+font-size:40px;
+line-height: 85px;
+}
+
+.t-nav{ width:100%; height:50px; background:#124057;}
+.m-nav{ width:1000px; height:50px; margin:0 auto;}
+.ui-item{ width:99px; height:50px; line-height:50px; text-align:center; border-right:1px solid #103447;}
+.ui-menu{ width:119px; height:50px; line-height:50px; text-align:center; background:#168db8 url(img/menu_ico.gif) no-repeat 101px 23px; border-right:1px solid #0c769e; position:relative;}
+.ui-menu-cont{ width:119px; position:absolute; top:50px; left:0px; display:none;}
+.ui-menu-cont li{ width:119px; height:30px; line-height:30px; background:#168db8; border-top:1px solid #fff;}
+.ui-menu-cont li a{}
+.t-nav a{ color:#fff; font-size:14px;}
+.t-nav a:hover{ color:#fff; text-decoration:underline;}
+</style>
+<body class="easyui-layout" data-options="fit:true" onload="startTime()">
+<div region="north" border="false" split="true" style="overflow: hidden; height: 85px;">
+
+<div class="header_bg">
+<b class="font3">佛山东海理化EDI管理系统 </b>
+
+
+<span  style="float:right; padding-right:20px;padding-top:55px;" >
+<b class="font2" th:inline="text">Welcome [[${username}]] </b>
+     &nbsp;<label id="time"></label>&nbsp;&nbsp;<a  href="logout" iconcls="icon-logout" id="loginOut"><b>安全退出</b></a></span>
+</div>
+
+</div>	
+<div region="west" split="true" title="导航菜单" style="width: 200px;">
+	<div id="nav">		
+	</div>
+</div>
+<div id="mainPanle" region="center" style="background: #eee; overflow-y:hidden">
+        <div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+			<div class="indextab" title="首页" iconCls="icon-home" data-options="fit:true,border:false" >
+				<iframe scrolling="auto" frameborder="0"  src="main" style="width:100%;height:100%;"></iframe>
+			</div>
+		</div>
+</div>
+<div id="bottom" region="south" style="height: 40px;background: #eee; overflow-y:hidden;" >
+                <div class="footer-copyright">
+                    <p>© 2002-2018  版权所有，并保留所有权利</p>
+                </div>
+</div>
+</body>
+
+</html>

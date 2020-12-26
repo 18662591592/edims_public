@@ -1,0 +1,78 @@
+.content{
+    height:63.8rem;
+    text-align: center;
+    padding:97px 160px;
+}
+.content-header{
+    margin:0px auto 40px auto;
+    font-family: PingFang SC;
+    font-size:40px;
+    color:#3578FF;
+}
+.search-input{
+    font-family:PingFang SC;
+    font-size:40px;
+    width: 480px;
+    color:#353535;
+    border:1px solid#E7E7E7;
+    border-radius:5px;
+    padding:15px 15px;
+}
+.print-button{
+    margin-left:30px;
+    background-color: #5890FF;
+    border-radius:5px;
+    color:white;
+    font-size:40px;
+    letter-spacing: 10px;
+    padding:15px 40px;
+}
+.key-table{
+    width:100%;
+    margin-top:40px;
+    font-size:40px;
+}
+.key-table tr td{
+    width:100px;
+    height:80px;
+}
+.key-table tr td div{
+    width:90px;
+    height:90px;
+    line-height: 90px;
+    border-radius:5px;
+    margin-bottom:10px;
+}
+.key-table tr td div:hover{
+   background-color: #48F0BE;
+   color:white;
+}
+.bg-blue{
+    background-color: #528BFF;
+    color:white;
+}
+.bg-zm{
+    background-color:#DFEAFF;
+    color:#528AFE;
+}
+.margin-r9{
+    margin-right:9px;
+}
+.clear-btn{
+    width:190px !important;
+    background: url("../images/search/clear.png") no-repeat;
+    background-size: 100% 100%;
+}
+.clear-btn:hover{
+    background-color:#528BFD !important;
+    border-radius:8px;
+}
+.delete-btn{
+    width:190px !important;
+    background: url("../images/search/delete.png") no-repeat;
+    background-size: 100% 100%;
+}
+.delete-btn:hover{
+    background-color:#528BFD !important;
+    border-radius:8px;
+}

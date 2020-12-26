@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bgi.edims.mapper.UserMapper" >
+  <resultMap id="UserResultMap" type="com.bgi.edims.model.EdiUser" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="md5_pwd" property="md5Pwd" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="is_email_on" property="isEmailOn" jdbcType="BOOLEAN" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <association property="supplier" column="{supplierCode=supplier_code}" select="com.bgi.edims.mapper.SupplierMapper.getEdiSuppliers"/>
+    <association property="role" column="{roleId=role_id}" select="com.bgi.edims.mapper.RoleMapper.getBaseEdiRoles"/>
+  </resultMap>
+  <resultMap id="UserBaseResultMap" type="com.bgi.edims.model.EdiUser" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="md5_pwd" property="md5Pwd" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="is_email_on" property="isEmailOn" jdbcType="BOOLEAN" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="last_modify_time" property="lastModifyTime" jdbcType="TIMESTAMP" />
+    <result column="last_modify_user" property="lastModifyUser" jdbcType="VARCHAR" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="page_sql_filter">
+  		<if test="rows != null" >
+		limit #{startIndex},#{rows}
+		</if>
+  </sql>
+  <!-- ############# -->
+  <!-- 供应商相关sqlMap -->
+  <!-- ############# -->
+  <sql id="user_where_filter">
+  		<where>
+		<if test="roleId != null and roleId !='' ">and role_id=#{roleId}</if>
+		<if test="userId != null and userId !='' ">and user_id=#{userId}</if>
+		<if test="userName != null and userName !='' ">and user_name=#{userName}</if>
+		<if test="realName != null and realName !=''">and real_name like '%${realName}%'</if>
+		<if test="isEmailOn != null  and isEmailOn !=''">and is_email_on=#{isEmailOn}</if>
+		<if test="email != null and email !='' ">and email like '%${email}%'</if>
+		<if test="supplierCode != null and supplierCode !='' ">and supplier_code=#{supplierCode}</if>
+		<if test="status != null and status !='' ">and status=#{status}</if>
+		<if test="type != null and type !='' ">and type=#{type}</if>
+		</where>
+  </sql>
+  
+	<insert id="createEdiUser" parameterType="com.bgi.edims.model.EdiUser" >
+   		INSERT INTO edi_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		
+			<if test="roleId != null">role_id,</if>
+			<if test="userName != null">user_name,</if>
+			<if test="md5Pwd != null">md5_pwd,</if>
+			<if test="realName != null">real_name,</if>
+			<if test="email != null">email,</if>
+			<if test="isEmailOn != null">is_email_on,</if>
+			<if test="supplierCode">supplier_code,</if>
+			<if test="status != null">status,</if>
+			<if test="type != null">type,</if>
+			<if test="lastModifyTime != null">last_modify_time,</if>
+			<if test="lastModifyUser != null">last_modify_user,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleId != null">#{roleId},</if>
+			<if test="userName != null">#{userName},</if>
+			<if test="md5Pwd != null">#{md5Pwd},</if>
+			<if test="realName != null">#{realName},</if>
+			<if test="email != null">#{email},</if>
+			<if test="isEmailOn != null">#{isEmailOn},</if>
+			<if test="supplierCode != null">#{supplierCode},</if>
+			<if test="status != null">#{status},</if>
+			<if test="type != null">#{type},</if>
+			<if test="lastModifyTime != null">#{lastModifyTime},</if>
+			<if test="lastModifyUser != null">#{lastModifyUser},</if>
+		</trim>
+   	</insert>
+  
+   <delete id="deleteEdiUser" parameterType="com.bgi.edims.model.EdiUser" >
+    delete from edi_user
+    <include refid="user_where_filter"/>
+  </delete>
+  
+  <update id="updateEdiUser" parameterType="com.bgi.edims.model.EdiUser">
+		update edi_user 
+		<set>
+		<if test="userName != null and userName != ''">user_name=#{userName},</if>
+			<if test="md5Pwd != null and md5Pwd != ''">md5_pwd=#{md5Pwd},</if>
+			<if test="roleId != null and roleId != ''">role_id=#{roleId},</if>
+			<if test="realName != null and realName != ''">real_name=#{realName},</if>
+			<if test="email != null and email != ''">email=#{email},</if>
+			<if test="isEmailOn != null and isEmailOn != ''">is_email_on=#{isEmailOn},</if>
+			<if test="supplierCode != null and supplierCode != ''">supplier_code=#{supplierCode},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+			<if test="type != null and type != ''">type=#{status},</if>
+            <if test="lastModifyTime != null">last_modify_time=#{lastModifyTime},</if>
+            <if test="lastModifyUser != null and lastModifyUser != ''">last_modify_user=#{lastModifyUser},</if>
+		</set>
+		where user_id=#{userId}
+	</update>
+	
+  	<select id="getEdiUsers" parameterType="com.bgi.edims.model.EdiUser" resultMap="UserResultMap">
+		select role_id,user_id,user_name,md5_pwd,real_name,email,is_email_on,supplier_code,status,type,last_modify_time,last_modify_user
+		from edi_user
+		<include refid="user_where_filter"/>
+		order by last_modify_time desc
+	</select>
+	<select id="getEdiUsersCount" parameterType="com.bgi.edims.model.EdiUser" resultType="java.lang.Integer">
+		select count(1)
+		from edi_user
+		<include refid="user_where_filter"/>
+	</select>
+    <select id="getBaseEdiUsers" parameterType="com.bgi.edims.model.EdiUser" resultMap="UserBaseResultMap">
+		select role_id,user_id,user_name,md5_pwd,real_name,email,is_email_on,supplier_code,status,type,last_modify_time,last_modify_user
+		from edi_user
+		<include refid="user_where_filter"/>
+		order by last_modify_time desc
+		<include refid="page_sql_filter"/>
+	</select>
+    <select id="getBaseEdiUsersCount" parameterType="com.bgi.edims.model.EdiUser" resultType="java.lang.Integer">
+		select count(1)
+		from edi_user
+		<include refid="user_where_filter"/>
+	</select>
+</mapper>

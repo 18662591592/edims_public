@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理</title>
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css" href="/js/jquery-easyui/themes/icon.css" />
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.min.css" />
+<script type="text/javascript" src="/js/jquery-easyui/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/highcharts.js"></script>
+<script type="text/javascript" src="/js/highmaps/code/modules/map.js"></script>
+<link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+<script type="text/javascript" src="/js/json2.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/comboboxInit.js"></script>
+<script type="text/javascript" src="/js/edi-common.js"></script>
+<script type="text/javascript" src="/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/edijs/folder.js"></script>
+</head>
+<body >
+<div class="main_panel">
+<hr class="hr0" />
+<form>
+  <fieldset>
+    <legend>采购订单</legend>
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 90px;">路径:</td>
+						<td><input id="order_scan_path" class="easyui-textbox" type="text" style="width: 180px;" data-options="panelHeight:'auto'"></input></td>
+						<td align="right" style="width: 150px;">同步频率:</td>
+						<td><select id="order_scan_interval" class="easyui-combobox" style="width: 150px;">
+						<option value="99">关闭</option>
+						<option value="1">每小时</option>
+						<option value="2">每两个小时</option>
+						<option value="3">每三个小时</option>
+						<option value="4">每四个小时</option>
+						<option value="6">每六个小时</option>
+						<option value="12">每半天</option>
+						<option value="24">每天</option>
+						<option value="0">实时</option>
+						</select></td>	
+						
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="updateOrderConfig()"
+							iconcls="icon-save">保存</a></td>
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="testOrderConfig()"
+							iconcls="icon-path-test">测试</a></td>
+					</tr>
+				</table>
+  </fieldset>
+</form>
+
+<hr class="hr0" />
+<form>
+  <fieldset>
+    <legend>内示订单</legend>
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 90px;">路径:</td>
+						<td><input id="inner_order_scan_path" class="easyui-textbox" type="text"  style="width: 180px;" data-options="panelHeight:'auto'"></input></td>
+						
+						<td align="right" style="width: 150px;">同步频率:</td>
+						<td><select id="inner_order_scan_interval" class="easyui-combobox" style="width: 150px;">
+						<option value="99">关闭</option>
+						<option value="1">每小时</option>
+						<option value="2">每两个小时</option>
+						<option value="3">每三个小时</option>
+						<option value="4">每四个小时</option>
+						<option value="6">每六个小时</option>
+						<option value="12">每半天</option>
+						<option value="24">每天</option>
+						<option value="0">实时</option>
+						</select></td>	
+						
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="updateInnerOrderConfig()"
+							iconcls="icon-save">保存</a></td>
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="testInnerOrderConfig()"
+							iconcls="icon-path-test">测试</a></td>
+					</tr>
+				</table>
+  </fieldset>
+</form>
+<hr class="hr0" />
+<form>
+  <fieldset>
+    <legend>ASN</legend>
+				<table align="left" class="searchTable">
+					<tr>
+						<td align="right" style="width: 90px;">路径:</td>
+						<td><input id="asn_scan_path" class="easyui-textbox" type="text" style="width: 180px;" data-options="panelHeight:'auto'"></input></td>
+						
+						<td align="right" style="width: 150px;">同步频率:</td>
+						<td><select id="asn_scan_interval" class="easyui-combobox" style="width: 150px;">
+						<option value="99">关闭</option>
+						<option value="1">每小时</option>
+						<option value="2">每两个小时</option>
+						<option value="3">每三个小时</option>
+						<option value="4">每四个小时</option>
+						<option value="6">每六个小时</option>
+						<option value="12">每半天</option>
+						<option value="24">每天</option>
+						<option value="0">实时</option>
+						</select></td>						
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="updateAsnConfig()"
+							iconcls="icon-save">保存</a></td>
+						<td align="center" style="width: 130px;" rowspan="2"><a
+							href="javascript:void(0)" class="easyui-linkbutton"
+							style="width: 70px;"
+							onclick="testAsnConfig()"
+							iconcls="icon-path-test">测试</a></td>
+					</tr>
+				</table>
+  </fieldset>
+</form>
+</div>
+
+
+
+
+</body>
+</html>
